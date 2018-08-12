@@ -26,4 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+    * Encripta a senha antes de salvar no banco
+    *
+    * @param $value
+    * @return void
+    */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

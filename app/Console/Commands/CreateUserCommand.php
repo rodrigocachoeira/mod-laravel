@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Console\Commands\Usefuls\DatabaseUseful;
+use Illuminate\Console\Command;
+use App\User;
 
 /**
 * Create users for application
@@ -50,9 +51,28 @@ class CreateUserCommand extends Command
     public function handle()
     {
         if ($this->databaseIsOk(! is_null($this->argument('error')))) {
-            // TODO: do awesome things here
+            $this->newUser();
         } else {
             $this->error('Please, check your database configuration first.');
+        }
+    }
+
+    /**
+    * Cria um novo usuário
+    * par a aplicação
+    *
+    * @return boolean
+    */
+    protected function newUser()
+    {
+        $name = $this->ask('Name: ');
+        $email = $this->ask('E-mail: ');
+        $password = $this->secret('Password: ');
+
+        if (User::create(compact('name', 'email', 'password'))) {
+            return $this->info(sprintf('%s has been created!', $name));
+        } else {
+            return $this->error('Could not create User.');
         }
     }
 }
