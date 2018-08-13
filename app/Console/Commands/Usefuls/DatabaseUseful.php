@@ -54,6 +54,19 @@ trait DatabaseUseful
 	}
 
 	/**
+	* Retorna todas as tabelas registradas
+	* na aplicação
+	*
+	* @return array
+	*/
+	protected function tables()
+	{
+		$tables = array_map('reset', DB::select('SHOW TABLES;'));
+		return array_values(array_diff($tables,
+			['migrations', 'password_resets']));
+	}
+
+	/**
 	* Retorna o nome da base de dados
 	* configurada na aplicação
 	*

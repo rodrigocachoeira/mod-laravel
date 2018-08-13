@@ -70,9 +70,9 @@ class CreateUserCommand extends Command
         $password = $this->secret('Password: ');
 
         if (User::create(compact('name', 'email', 'password'))) {
-            return $this->info(sprintf('%s has been created!', $name));
+            $this->info(sprintf('%s has been created!', $name));
         } else {
-            return $this->error('Could not create User.');
+            $this->error('Could not create User.');
         }
     }
 }

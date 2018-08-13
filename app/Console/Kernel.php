@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\CreateUserCommand;
 use App\Console\Commands\UpDatabaseCommand;
+use App\Console\Commands\GenerateFactoriesCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         CreateUserCommand::class,
         UpDatabaseCommand::class,
+        GenerateFactoriesCommand::class,
     ];
 
     /**

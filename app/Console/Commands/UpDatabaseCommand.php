@@ -90,7 +90,7 @@ class UpDatabaseCommand extends Command
     */
     protected function hasSomeDataAlready()
     {
-        foreach (array_map('reset', DB::select('SHOW TABLES;')) as $table) {
+        foreach ($this->tables() as $table) {
             if ($table !== 'migrations') {
                 if (count(DB::select(sprintf('SELECT * FROM %s', $table))) > 0)
                     return true;
