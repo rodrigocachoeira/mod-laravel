@@ -3,6 +3,8 @@
 Laravel com algumas configurações pré definidas.
 
   - Commands
+  - Filters
+  - Repositories
 
 ### Available Commands
 
@@ -35,8 +37,8 @@ fossem resolvidas com mais facilidade.
 
 **Filters**
 
-Uma das rotinas mais comuns de um desenvolvedor é a criação de condicionais que representam os filtros realizadas pelo usuário em formulários, para buscar suas informações. Essa atividade pode se tornar um pouco repetitiva e muitas vezes, deixando o código "feio", quando há muitas condicionais param serem filtradas.
-Para que resolver esse problema foi desenvolvido uma classe Filter que por meio de atributos é métodos, é possível realizar os filtros necessários.
+Uma das rotinas mais comuns de um desenvolvedor é a criação de condicionais que representam os filtros realizados pelo usuário em formulários, para buscar suas informações. Essa atividade pode se tornar um pouco repetitiva e muitas vezes, acaba deixando o código "feio", quando há muitas condicionais para filtrar.
+Para resolver esse problema foi desenvolvido uma classe Filter que por meio de atributos é métodos, e possível realiza os filtros necessários.
 
 ```php
 namespace App\Filters;

@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Console\Commands\Usefuls\DatabaseUseful;
 use Illuminate\Console\Command;
-use App\User;
+use App\Business\Entities\User;
 
 /**
 * Create users for application
