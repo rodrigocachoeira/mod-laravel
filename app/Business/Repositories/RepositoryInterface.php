@@ -48,6 +48,15 @@ interface RepositoryInterface
 	public function first();
 
 	/**
+	* Retorna todos os registros ordenados
+	*
+	* @param $key
+	* @param $type
+	* @return Illuminate\Database\Eloquent\Collection
+	*/
+	public function ordered($key, $type);
+
+	/**
 	* Retorna o último registro
 	* encontrado
 	*

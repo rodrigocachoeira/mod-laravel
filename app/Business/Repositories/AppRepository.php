@@ -61,7 +61,19 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function first()
 	{
-		//TODO: here
+		return $this->model->first();
+	}
+
+	/**
+	* Retorna todos os registros ordenados
+	*
+	* @param $key
+	* @param $type
+	* @return Illuminate\Database\Eloquent\Collection
+	*/
+	public function ordered($key, $type)
+	{
+		return $this->model->orderBy($key, $type)->get();
 	}
 
 	/**
@@ -72,7 +84,7 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function last()
 	{
-		//TODO: here
+		return $this->model->orderBy('id', 'DESC')->first();
 	}
 
 	/**
@@ -85,7 +97,7 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function getWhere($key, $value)
 	{
-		//TODO: here
+		return $this->model->where($key, $value)->get();
 	}
 
 	/**
@@ -98,7 +110,7 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function getWhereFirst($key, $value)
 	{
-		//TODO: here
+		return $this->model->where($key, $value)->first();
 	}
 
 	/**
@@ -110,7 +122,12 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function getWhereAt(array $where)
 	{
-		//TODO: here
+		$builder = $this->model;
+		array_walk($where, function ($value, $key) use (&$builder) {
+			$builder = $builder->where($key, $value);
+		});
+
+		return $builder->get();
 	}
 
 	/**
@@ -122,7 +139,12 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function getWhereAtFirst(array $where)
 	{
-		//TODO: here
+		$builder = $this->model;
+		array_walk($where, function ($value, $key) use (&$builder) {
+			$builder = $builder->where($key, $value);
+		});
+
+		return $builder->first();
 	}
 
 	/**
@@ -133,7 +155,7 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function paginate($paginate = 10)
 	{
-		//TODO: here
+		return $this->model->paginate($paginate);
 	}
 
 	/**
@@ -146,7 +168,12 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function paginateOrder($paginate = 10, array $order)
 	{
-		//TODO: here
+		$builder = $this->model;
+		array_walk($order, function ($value, $key) use (&$builder) {
+			$builder = $builder->orderBy($key, $value);
+		});
+
+		return $builder->paginate($paginate);
 	}
 
 	/**
@@ -158,7 +185,7 @@ abstract class AppRepository implements RepositoryInterface
 	*/
 	public function withFilter(Filter $filter)
 	{
-		//TODO: here
+		return $this->model->filter($filter)->get();
 	}
 
 }
