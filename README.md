@@ -99,7 +99,8 @@ class PostFilter extends Filter
     * ser definido como método para realizar
     * as condicionais
     *
-    * @obesrvation Caso o método com o nome do atributo não seja definido,      * por padrão será feito um like com o value
+    * @obesrvation Caso o método com o nome do atributo não seja definido,
+    * por padrão será feito um like com o value
     *
     * @param string $value Valor enviado por requisição da key title
     * @return void
@@ -111,7 +112,8 @@ class PostFilter extends Filter
 
     /**
     * Método definido para o atributo $fixed que indica a coleta
-    * de todos os registros criado hoje, esse método sera invocado em todas     * as requisições, independente dos valores enviados por requisição
+    * de todos os registros criado hoje, esse método sera invocado em todas
+    * as requisições, independente dos valores enviados por requisição
     *
     * @return void
     */
@@ -123,3 +125,9 @@ class PostFilter extends Filter
 
 }
 ```
+
+**QueryLoggingProvider**
+
+Provedor que preenche um documento com todas as queries realizadas pela aplicação. Configurado para funcionar apenas em ambiente local. O documento é criado dentro de storage/logs no padrão queries-year-mm-dd.log.
+
+> storage/logs/queries-2018-08-30.log

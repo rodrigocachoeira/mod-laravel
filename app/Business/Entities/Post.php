@@ -1,8 +1,6 @@
 <?php
 
-namespace App;
-
-use App\Model;
+namespace App\Business\Entities;
 
 class Post extends Model
 {

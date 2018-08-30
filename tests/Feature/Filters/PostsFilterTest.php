@@ -9,7 +9,7 @@ use App\Filters\TodaysPostFilter;
 use App\Filters\PostFilter;
 use Tests\TestCase;
 use Carbon\Carbon;
-use App\Post;
+use App\Business\Entities\Post;
 
 class PostsFilterTest extends TestCase
 {
