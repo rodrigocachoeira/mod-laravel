@@ -188,4 +188,78 @@ abstract class AppRepository implements RepositoryInterface
 		return $this->model->filter($filter)->get();
 	}
 
+	/**
+	* Realiza a inserção no banco de dados
+	* com base nas informações do modelo proposto
+	*
+	* @param array $data
+	* @return boolean
+	*/
+	public function save(array $data)
+	{
+		return $this->model->create($data);
+	}
+
+	/**
+	* Realiza a atuailização do modelo
+	* definido com base em um identificador
+	*
+	* @param $id
+	* @param array $data
+	* @return boolean
+	*/
+	public function update($id, array $data)
+	{
+		return $this->model->where('id', $id)
+			->update($data);
+	}
+
+	/**
+	* Realiza a exclusão de um registro
+	* da base de dados com base no identificador
+	*
+	* @param $id
+	* @return boolean
+	*/
+	public function delete($id)
+	{
+		return $this->model->where('id', $id)->delete();
+	}
+
+	/**
+	* Atualiza as informações com base em
+	* um conjunto de condições passadas
+	*
+	* @param @fields
+	* @param @data
+	* @return boolean
+	*/
+	public function updateAt(array $fields, array $data)
+	{
+		$builder = $this->model;
+		array_walk($fields, function ($key, $value) use (&$builder) {
+			$builder = $builder->where($key, $value);
+		});
+
+		return $builder->update($data);
+	}
+
+	/**
+	* Remove informações com base em
+	* um conjunto de condições passadas
+	*
+	* @param @fields
+	* @param @data
+	* @return boolean
+	*/
+	public function deleteAt(array $fields, array $data)
+	{
+		$builder = $this->model;
+		array_walk($fields, function ($key, $value) use (&$builder) {
+			$builder = $builder->where($key, $value);
+		});
+
+		return $builder->delete($data);
+	}
+
 }

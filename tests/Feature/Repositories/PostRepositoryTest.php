@@ -192,4 +192,58 @@ class PostRepositoryTest extends TestCase
 		$this->assertEquals($repRecords->count(), $modalRecords->count());
 	}
 
+	/** @test */
+	public function the_respository_should_record_information()
+	{
+		$currentSize = $this->repository->all()->count();
+		$dbCount = count(DB::select('select * from posts'));
+
+		$this->assertEquals($dbCount, $currentSize);
+
+		$this->repository->save($post = make(Post::class)->toArray());
+
+		$dbCount = count(DB::select('select * from posts'));
+		$this->assertEquals($dbCount, $this->repository->all()->count());
+
+		$this->assertEquals($post['title'],
+			$this->repository->getWhereFirst('title', $post['title'])->title);
+	}
+
+	/** @test */
+	public function it_should_be_possible_update_records()
+	{
+		factory(Post::class, 50)->create();
+		$records = $this->repository->all();
+
+		$record = $records->get(random_int(0, $records->count() - 1));
+
+		$this->assertEquals($this->repository->getWhereFirst('title', $record->title)->title, $record->title);
+
+		$newTitle = make(Post::class)->title;
+		$this->repository->update($record->id, ['title' => $newTitle]);
+
+		$this->assertTrue($this->repository->getWhere('title',
+			$record->title)->isEmpty());
+
+		$this->assertEquals($this->repository->getWhereFirst('title', $newTitle)->title, $newTitle);
+	}
+
+	/** @test */
+	public function it_should_be_possible_delete_records_by_id()
+	{
+		factory(Post::class, 50)->create();
+		$recordsBefore = $this->repository->all();
+
+		$this->repository->delete($recordsBefore->first()->id);
+		$recordsAfter = $this->repository->all();
+
+		$this->assertEquals($recordsBefore->count() -1 , $recordsAfter->count());
+	}
+
+
+	public function it_should_be_possible_to_delete_records_by_key_value()
+	{
+		//TODO: here
+	}
+
 }

@@ -129,4 +129,52 @@ interface RepositoryInterface
 	*/
 	public function withFilter(Filter $filter);
 
+	/**
+	* Realiza a inserção no banco de dados
+	* com base nas informações do modelo proposto
+	*
+	* @param array $data
+	* @return boolean
+	*/
+	public function save(array $data);
+
+	/**
+	* Realiza a atuailização do modelo
+	* definido com base em um identificador
+	*
+	* @param $id
+	* @param array $data
+	* @return boolean
+	*/
+	public function update($id, array $data);
+
+	/**
+	* Realiza a exclusão de um registro
+	* da base de dados com base no identificador
+	*
+	* @param $id
+	* @return boolean
+	*/
+	public function delete($id);
+
+	/**
+	* Atualiza as informações com base em
+	* um conjunto de condições passadas
+	*
+	* @param @fields
+	* @param @data
+	* @return boolean
+	*/
+	public function updateAt(array $fields, array $data);
+
+	/**
+	* Remove informações com base em
+	* um conjunto de condições passadas
+	*
+	* @param @fields
+	* @param @data
+	* @return boolean
+	*/
+	public function deleteAt(array $fields, array $data);
+
 }
