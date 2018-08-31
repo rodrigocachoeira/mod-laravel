@@ -172,9 +172,8 @@ interface RepositoryInterface
 	* um conjunto de condições passadas
 	*
 	* @param @fields
-	* @param @data
 	* @return boolean
 	*/
-	public function deleteAt(array $fields, array $data);
+	public function deleteAt(array $fields);
 
 }

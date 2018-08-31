@@ -240,10 +240,43 @@ class PostRepositoryTest extends TestCase
 		$this->assertEquals($recordsBefore->count() -1 , $recordsAfter->count());
 	}
 
+	/** @test */
+	public function it_should_be_possible_to_update_records_by_key_value()
+	{
+		$oldSubtitle = make(Post::class)->subtitle;
+		$newSubtitle = make(Post::class)->subtitle;
 
+		factory(Post::class, 2)->create();
+		factory(Post::class, 5)->create(['subtitle' => $oldSubtitle]);
+
+		$this->assertCount(5, $this->repository
+				->getWhere('subtitle', $oldSubtitle)->toArray());
+
+		$this->repository->updateAt(['subtitle' => $oldSubtitle],
+			['subtitle' => $newSubtitle]);
+
+		$this->assertCount(0, $this->repository
+			->getWhere('subtitle', $oldSubtitle)->toArray());
+
+		$this->assertCount(5, $this->repository
+			->getWhere('subtitle', $newSubtitle)->toArray());
+	}
+
+	/** @test */
 	public function it_should_be_possible_to_delete_records_by_key_value()
 	{
-		//TODO: here
+		$subtitle = make(Post::class)->subtitle;
+
+		factory(Post::class, 2)->create();
+		factory(Post::class, 5)->create(['subtitle' => $subtitle]);
+
+		$this->assertCount(5, $this->repository
+				->getWhere('subtitle', $subtitle)->toArray());
+
+		$this->repository->deleteAt(['subtitle' => $subtitle]);
+
+		$this->assertCount(0, $this->repository
+			->getWhere('subtitle', $subtitle)->toArray());
 	}
 
 }

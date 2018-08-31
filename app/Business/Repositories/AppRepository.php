@@ -237,7 +237,7 @@ abstract class AppRepository implements RepositoryInterface
 	public function updateAt(array $fields, array $data)
 	{
 		$builder = $this->model;
-		array_walk($fields, function ($key, $value) use (&$builder) {
+		array_walk($fields, function ($value, $key) use (&$builder) {
 			$builder = $builder->where($key, $value);
 		});
 
@@ -249,17 +249,16 @@ abstract class AppRepository implements RepositoryInterface
 	* um conjunto de condições passadas
 	*
 	* @param @fields
-	* @param @data
 	* @return boolean
 	*/
-	public function deleteAt(array $fields, array $data)
+	public function deleteAt(array $fields)
 	{
 		$builder = $this->model;
-		array_walk($fields, function ($key, $value) use (&$builder) {
+		array_walk($fields, function ($value, $key) use (&$builder) {
 			$builder = $builder->where($key, $value);
 		});
 
-		return $builder->delete($data);
+		return $builder->delete();
 	}
 
 }
