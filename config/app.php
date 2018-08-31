@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\QueryLoggingProvider;
+use App\Providers\SessionRetrieveProvider;
 
 return [
 
@@ -162,7 +163,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         QueryLoggingProvider::class,
-
     ],
 
     /*

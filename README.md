@@ -35,6 +35,16 @@ Para melhorar o desenvolvimento do programador, alguns pacotes auxiliares foram
 desenvolvidos para que a experiência de desenvolvimento com problemas reais
 fossem resolvidas com mais facilidade.
 
+**Middlewares**
+
+Foram desenvolvidos alguns middlewares para auxiliar em funcionalidades comuns normalmente utilizadas no dia-a-dia de um desenvolvedor.
+
+**SessionRetrieveMiddleware**
+
+Middleware resposável por interagir com a sessão da aplicação do Laravel, armazenando todas as urls juntamente com seus parâmetros GET passados. Sua principal função é a de possibilitar o retorno para uma página mantendo seus filtros em uma listagem. Para que os parâmetros antigos sejam carregados ao acessar uma página deve-se utilizar o parâmetro previous na url, como é apresentado no exemplo abaixo:
+
+> laravel.com/users?previous
+
 **Filters**
 
 Uma das rotinas mais comuns de um desenvolvedor é a criação de condicionais que representam os filtros realizados pelo usuário em formulários, para buscar suas informações. Essa atividade pode se tornar um pouco repetitiva e muitas vezes, acaba deixando o código "feio", quando há muitas condicionais para filtrar.
@@ -245,6 +255,53 @@ Para melhor organizaçãod o código fonte, essa versão do laravel está utiliz
     * @return Illuminate\Database\Eloquent\Collection
     */
     public function withFilter(Filter $filter);
+
+    /**
+    * Realiza a inserção no banco de dados
+    * com base nas informações do modelo proposto
+    *
+    * @param array $data
+    * @return boolean
+    */
+    public function save(array $data);
+
+    /**
+    * Realiza a atuailização do modelo
+    * definido com base em um identificador
+    *
+    * @param $id
+    * @param array $data
+    * @return boolean
+    */
+    public function update($id, array $data);
+
+    /**
+    * Realiza a exclusão de um registro
+    * da base de dados com base no identificador
+    *
+    * @param $id
+    * @return boolean
+    */
+    public function delete($id);
+
+    /**
+    * Atualiza as informações com base em
+    * um conjunto de condições passadas
+    *
+    * @param @fields
+    * @param @data
+    * @return boolean
+    */
+    public function updateAt(array $fields, array $data);
+
+    /**
+    * Remove informações com base em
+    * um conjunto de condições passadas
+    *
+    * @param @fields
+    * @return boolean
+    */
+    public function deleteAt(array $fields);
 ```
 
 Todos os repositórios criados devem extender de:
@@ -275,3 +332,6 @@ Todos os repositórios criados devem extender de:
 Provedor que preenche um documento com todas as queries realizadas pela aplicação. Configurado para funcionar apenas em ambiente local. O documento é criado dentro de storage/logs no padrão queries-year-mm-dd.log.
 
 > storage/logs/queries-2018-08-30.log
+
+
+
