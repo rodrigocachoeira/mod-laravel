@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filters\TodaysPostFilter;
-use App\Filters\PostFilter;
+use App\Filters\UserFilter;
 use Tests\TestCase;
 use Carbon\Carbon;
 use App\Business\Entities\Post;
@@ -19,7 +19,7 @@ class PostsFilterTest extends TestCase
 	/** @test */
 	public function the_post_filter_class_must_have_the_scope_method()
 	{
-		$postFilter = (new Post())->filter(app()->make(PostFilter::class));
+		$postFilter = (new Post())->filter(app()->make(UserFilter::class));
 		$this->assertTrue($postFilter instanceof Builder);
 	}
 
@@ -32,7 +32,7 @@ class PostsFilterTest extends TestCase
 		factory(Post::class, 10)->create(); //Vários Posts aleatórios
 
 		$model = new Post();
-		$records = $model->filter(app()->make(PostFilter::class))
+		$records = $model->filter(app()->make(UserFilter::class))
 			->get();
 
 		$this->assertCount(1, $records);
@@ -61,7 +61,7 @@ class PostsFilterTest extends TestCase
 		$third = create(Post::class, ['title' => 'Exemplo 3']);
 
 		$model = new Post();
-		$records = $model->filter(app()->make(PostFilter::class))
+		$records = $model->filter(app()->make(UserFilter::class))
 			->get();
 
 		$this->assertEquals($first->title, $records->get(0)->title);
@@ -75,7 +75,7 @@ class PostsFilterTest extends TestCase
 		factory(Post::class, 50)->create();
 
 		$model = new Post();
-		$records = $model->filter(app()->make(PostFilter::class))
+		$records = $model->filter(app()->make(UserFilter::class))
 			->get();
 
 		$this->assertTrue(! is_null($records->first()->title));
